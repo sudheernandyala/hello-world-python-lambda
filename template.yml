@@ -28,6 +28,15 @@ Parameters:
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
 Resources:
+  ddbTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
@@ -36,11 +45,16 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
-      Handler: src/handlers/hello-from-lambda.helloFromLambdaHandler
+      Handler: src/handlers/index.handler
       Runtime: nodejs10.x
       MemorySize: 128
       Timeout: 60
       Description: A Lambda function that returns a static string.
+      Environment:
+        Variables:
+          DDB_TABLE: !Ref ddbTable
       Policies:
         # Give Lambda basic execution Permission to the helloFromLambda
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ddbTable
         - AWSLambdaBasicExecutionRole
