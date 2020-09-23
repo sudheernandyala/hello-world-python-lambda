@@ -2,7 +2,7 @@ const dynamodb = require('aws-sdk/clients/dynamodb');
 const docClient = new dynamodb.DocumentClient();
 
 exports.handler = async (event, context) => {
-    const message = 'Hello from Lambda2!';
+    const message = 'Hello from Lambda3!';
     const tableName = process.env.DDB_TABLE;
     const logStreamName = context.logStreamName;
     var params = {
