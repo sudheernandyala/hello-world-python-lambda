@@ -4,11 +4,15 @@ phases:
     runtime-versions:
         python: 3.8
     commands:
+      # Install pipenv
+      - python3 -m pip install pipenv
       # Install all dependencies (including dependencies for running tests)
-      - python3 -m pip install boto3
+      - pipenv install
   pre_build:
     commands:
-      # TODO: unit test, other QA tools, etc
+      # TODO: unit tests, other QA tools, etc
+      # Run a security check
+      - pipenv check
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
