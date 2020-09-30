@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 boto3 = "*"
 flake8 = "*"
+pytest = "*"
+pytest-mock = "*"
 
 [requires]
 python_version = "3.8"

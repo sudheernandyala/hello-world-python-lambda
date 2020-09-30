@@ -25,7 +25,7 @@ def my_handler(event, context):
         },
         ReturnValues='ALL_NEW'
     )
-    logger.info('Dynamo call completed with response:', response)
+    logger.info('Dynamo call completed with response: %s', response)
 
-    logger.info('returning message:', message)
+    logger.info('returning message: %s', message)
     return {'body': message}

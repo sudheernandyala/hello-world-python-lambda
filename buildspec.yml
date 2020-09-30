@@ -10,7 +10,8 @@ phases:
       - pipenv install
   pre_build:
     commands:
-      # TODO: unit tests, other QA tools, etc
+      # Run the unit tests
+      - pytest
       # Run a security check
       - pipenv check
   build:
